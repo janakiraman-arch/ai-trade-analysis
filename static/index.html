@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex AI | Trade Analysis Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Lightweight Charts CDN -->
+    <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
+    <script>
+        window.onerror = function(msg, url, line) {
+            console.log("GLOBAL ERROR: " + msg + " in " + url + ":" + line);
+            return false;
+        };
+    </script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-icon">A</div>
+                <span>APEX AI</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-view="dashboard">
+                    <i data-lucide="layout-dashboard"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-view="analytics">
+                    <i data-lucide="bar-chart-3"></i>
+                    <span>Analytics</span>
+                </a>
+                <a href="#" class="nav-item" data-view="ai-signals">
+                    <i data-lucide="zap"></i>
+                    <span>AI Signals</span>
+                </a>
+                <a href="#" class="nav-item" data-view="history">
+                    <i data-lucide="history"></i>
+                    <span>Trade History</span>
+                </a>
+                <div class="nav-spacer"></div>
+                <a href="#" class="nav-item" data-view="settings">
+                    <i data-lucide="settings"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="header">
+                <div class="search-bar">
+                    <i data-lucide="search"></i>
+                    <input type="text" placeholder="Search markets (e.g. BTC, NVDA)...">
+                </div>
+                <div class="header-actions">
+                    <div id="live-price-wrapper" class="live-price-box">
+                        <span id="live-price-asset">BTC/USDT</span>
+                        <span id="live-price-val">--</span>
+                    </div>
+                    <div class="connection-status">
+                        <span class="status-dot"></span>
+                        LIVE
+                    </div>
+                    <button class="user-profile">
+                        <img src="https://ui-avatars.com/api/?name=Trader&background=6366f1&color=fff" alt="User">
+                    </button>
+                </div>
+            </header>
+
+            <section class="dashboard-grid">
+                <!-- Top KPI Cards -->
+                <div class="kpi-card glass">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Net Profit</span>
+                        <div class="kpi-icon-wrapper profit">
+                            <i data-lucide="trending-up"></i>
+                        </div>
+                    </div>
+                    <div class="kpi-value">+$12,450.20</div>
+                    <div class="kpi-change positive">+8.4% this month</div>
+                </div>
+
+                <div class="kpi-card glass">
+                    <div class="kpi-header">
+                        <span class="kpi-title">Win Rate</span>
+                        <div class="kpi-icon-wrapper win">
+                            <i data-lucide="target"></i>
+                        </div>
+                    </div>
+                    <div class="kpi-value">68.5%</div>
+                    <div class="kpi-change positive">+2.1% spike</div>
+                </div>
+
+                <div class="kpi-card glass">
+                    <div class="kpi-header">
+                        <span class="kpi-title">AI Sentiment</span>
+                        <div id="sentiment-status" class="kpi-icon-wrapper neutral">
+                            <i data-lucide="brain"></i>
+                        </div>
+                    </div>
+                    <div id="sentiment-value" class="kpi-value">Bullish</div>
+                    <div id="sentiment-score" class="kpi-change">Score: 0.65</div>
+                </div>
+
+                <!-- Chart Section -->
+                <div class="chart-container glass">
+                    <div class="card-header">
+                        <h3>Market Analysis</h3>
+                        <div class="chart-controls">
+                            <select id="asset-selector">
+                                <option value="BTC/USDT">BTC/USDT</option>
+                                <option value="ETH/USDT">ETH/USDT</option>
+                                <option value="NVDA">NVDA</option>
+                                <option value="AAPL">AAPL</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="price-chart" class="chart-content"></div>
+                </div>
+
+                <!-- AI Signals Section -->
+                <div class="signals-list glass">
+                    <div class="card-header">
+                        <h3>Live AI Signals</h3>
+                        <span class="badge">Realtime</span>
+                    </div>
+                    <div id="signals-container" class="signals-overflow">
+                        <!-- Signals injected by JS -->
+                        <div class="signal-skeleton">Scanning market...</div>
+                    </div>
+                </div>
+
+                <!-- Market Intelligence -->
+                <div class="intelligence-card glass">
+                    <div class="card-header">
+                        <h3>Market Intelligence</h3>
+                    </div>
+                    <div class="intel-content">
+                        <div class="intel-item">
+                            <span class="intel-label">Volatility Index</span>
+                            <span class="intel-val val-low">LOW</span>
+                        </div>
+                        <div class="intel-item">
+                            <span class="intel-label">Liquidity Depth</span>
+                            <span class="intel-val">HIGH</span>
+                        </div>
+                        <div class="intel-item">
+                            <span class="intel-label">Risk Exposure</span>
+                            <span class="intel-val val-med">MEDIUM</span>
+                        </div>
+                    </div>
+                    <div class="ai-summary">
+                        <p><i data-lucide="message-square-plus"></i> AI Insight: Current consolidation suggests a potential breakout in high-growth tech sectors within the next 48 hours.</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
