@@ -34,6 +34,8 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ── View Router ────────────────────────────────────────────── */
     const views = {
         'nav-dashboard': document.getElementById('view-dashboard'),
+        'nav-intelligence': document.getElementById('view-intelligence'),
+        'nav-activity': document.getElementById('view-activity'),
         'nav-analytics': document.getElementById('view-analytics'),
         'nav-signals': document.getElementById('view-signals'),
         'nav-settings': document.getElementById('view-settings')
