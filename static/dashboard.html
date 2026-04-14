@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apex AI | Trading Dashboard</title>
+    <meta name="description" content="Apex AI real-time trading dashboard — monitor live signals, candlestick charts, sentiment analysis and market intelligence.">
+    <link rel="stylesheet" href="/static/css/dashboard.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Lightweight Charts -->
+    <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
+</head>
+<body>
+    <!-- Animated background orbs -->
+    <div class="bg-orb orb-1"></div>
+    <div class="bg-orb orb-2"></div>
+    <div class="bg-orb orb-3"></div>
+
+    <div class="app-shell">
+
+        <!-- ═══════════ SIDEBAR ═══════════ -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-logo">
+                    <span>A</span>
+                    <div class="logo-ring"></div>
+                </div>
+                <div class="brand-text">
+                    <span class="brand-name">APEX AI</span>
+                    <span class="brand-tag">Trading Platform</span>
+                </div>
+            </div>
+
+            <div class="sidebar-section-label">MAIN MENU</div>
+            <nav class="sidebar-nav">
+                <a href="/dashboard" class="nav-link active" id="nav-dashboard">
+                    <div class="nav-icon"><i data-lucide="layout-dashboard"></i></div>
+                    <span>Dashboard</span>
+                    <div class="nav-pip"></div>
+                </a>
+                <a href="#" class="nav-link" id="nav-analytics">
+                    <div class="nav-icon"><i data-lucide="bar-chart-3"></i></div>
+                    <span>Analytics</span>
+                </a>
+                <a href="#" class="nav-link" id="nav-signals">
+                    <div class="nav-icon"><i data-lucide="zap"></i></div>
+                    <span>AI Signals</span>
+                    <span class="nav-badge">LIVE</span>
+                </a>
+                <a href="#" class="nav-link" id="nav-portfolio">
+                    <div class="nav-icon"><i data-lucide="wallet"></i></div>
+                    <span>Portfolio</span>
+                </a>
+                <a href="#" class="nav-link" id="nav-history">
+                    <div class="nav-icon"><i data-lucide="history"></i></div>
+                    <span>Trade History</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-section-label">SYSTEM</div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link" id="nav-alerts">
+                    <div class="nav-icon"><i data-lucide="bell"></i></div>
+                    <span>Alerts</span>
+                </a>
+                <a href="#" class="nav-link" id="nav-settings">
+                    <div class="nav-icon"><i data-lucide="settings"></i></div>
+                    <span>Settings</span>
+                </a>
+                <a href="/" class="nav-link" id="nav-home">
+                    <div class="nav-icon"><i data-lucide="home"></i></div>
+                    <span>Home</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <img src="https://ui-avatars.com/api/?name=Trader&background=6366f1&color=fff&size=40" alt="User">
+                <div class="footer-user">
+                    <span class="footer-name">Pro Trader</span>
+                    <span class="footer-plan">Premium Plan</span>
+                </div>
+                <div class="footer-dot"></div>
+            </div>
+        </aside>
+
+        <!-- ═══════════ MAIN CONTENT ═══════════ -->
+        <div class="main-wrap">
+
+            <!-- TOP HEADER -->
+            <header class="topbar">
+                <div class="topbar-left">
+                    <h1 class="page-title">Dashboard <span class="page-title-accent">Overview</span></h1>
+                    <div class="breadcrumb">
+                        <span>Home</span>
+                        <i data-lucide="chevron-right"></i>
+                        <span class="bc-active">Dashboard</span>
+                    </div>
+                </div>
+                <div class="topbar-right">
+                    <div class="search-wrap">
+                        <i data-lucide="search"></i>
+                        <input id="search-input" type="text" placeholder="Search assets, e.g. BTC…">
+                    </div>
+                    <div class="live-ticker" id="live-price-wrapper">
+                        <div class="ticker-asset" id="ticker-asset">BTC/USDT</div>
+                        <div class="ticker-price" id="ticker-price">--</div>
+                        <div class="ticker-change" id="ticker-change">--</div>
+                    </div>
+                    <div class="voice-assistant" id="voice-assistant">
+                        <div class="waveform" id="voice-waveform">
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                            <div class="bar"></div>
+                        </div>
+                        <button class="voice-toggle" id="voice-toggle" title="Enable AI Voice">
+                            <i data-lucide="mic-off"></i>
+                        </button>
+                    </div>
+                    <div class="status-chip">
+                        <span class="status-dot"></span>
+                        LIVE
+                    </div>
+                    <button class="avatar-btn">
+                        <img src="https://ui-avatars.com/api/?name=TR&background=6366f1&color=fff&size=38" alt="Trader">
+                    </button>
+                </div>
+            </header>
+
+            <!-- SCROLLABLE BODY -->
+            <main class="content-area">
+
+                <!-- KPI ROW -->
+                <div class="kpi-row">
+                    <div class="kpi-card" style="--delay:0.10s">
+                        <div class="kpi-top">
+                            <div class="kpi-label">Net Profit (MTD)</div>
+                            <div class="kpi-icon-box profit-box"><i data-lucide="trending-up"></i></div>
+                        </div>
+                        <div class="kpi-value">+$12,450.20</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-badge up">▲ 8.4%</span>
+                            <span class="kpi-sub">vs last month</span>
+                        </div>
+                        <div class="kpi-sparkline profit-spark"></div>
+                    </div>
+
+                    <div class="kpi-card" style="--delay:0.18s">
+                        <div class="kpi-top">
+                            <div class="kpi-label">Win Rate</div>
+                            <div class="kpi-icon-box win-box"><i data-lucide="target"></i></div>
+                        </div>
+                        <div class="kpi-value">68.5%</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-badge up">▲ 2.1%</span>
+                            <span class="kpi-sub">7-day spike</span>
+                        </div>
+                        <div class="kpi-sparkline win-spark"></div>
+                    </div>
+
+                    <div class="kpi-card" style="--delay:0.26s">
+                        <div class="kpi-top">
+                            <div class="kpi-label">AI Sentiment</div>
+                            <div class="kpi-icon-box ai-box" id="sentiment-icon-box"><i data-lucide="brain"></i></div>
+                        </div>
+                        <div class="kpi-value" id="sentiment-value">Bullish</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-badge neutral" id="sentiment-badge">Score: 0.65</span>
+                            <span class="kpi-sub">AI driven</span>
+                        </div>
+                        <div class="kpi-sparkline ai-spark"></div>
+                    </div>
+
+                    <div class="kpi-card" style="--delay:0.34s">
+                        <div class="kpi-top">
+                            <div class="kpi-label">Open Positions</div>
+                            <div class="kpi-icon-box pos-box"><i data-lucide="layers"></i></div>
+                        </div>
+                        <div class="kpi-value">7</div>
+                        <div class="kpi-footer">
+                            <span class="kpi-badge down">▼ 2</span>
+                            <span class="kpi-sub">closed today</span>
+                        </div>
+                        <div class="kpi-sparkline pos-spark"></div>
+                    </div>
+                </div>
+
+                <!-- MIDDLE SECTION: Chart + Signals -->
+                <div class="mid-grid">
+
+                    <!-- CHART CARD -->
+                    <div class="chart-card glass-card">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <h2 class="card-title">Market Analysis</h2>
+                                <span class="card-subtitle">Candlestick · Real-time</span>
+                            </div>
+                            <div class="chart-controls">
+                                <div class="tf-pills">
+                                    <button class="tf-pill active" data-tf="1H">1H</button>
+                                    <button class="tf-pill" data-tf="4H">4H</button>
+                                    <button class="tf-pill" data-tf="1D">1D</button>
+                                </div>
+                                <select id="asset-selector" class="asset-select">
+                                    <option value="BTC/USDT">BTC/USDT</option>
+                                    <option value="ETH/USDT">ETH/USDT</option>
+                                    <option value="NVDA">NVDA</option>
+                                    <option value="AAPL">AAPL</option>
+                                    <option value="TSLA">TSLA</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-stats-row">
+                            <div class="cstat"><span class="cstat-label">Open</span><span class="cstat-val" id="cs-open">--</span></div>
+                            <div class="cstat"><span class="cstat-label">High</span><span class="cstat-val green" id="cs-high">--</span></div>
+                            <div class="cstat"><span class="cstat-label">Low</span><span class="cstat-val red" id="cs-low">--</span></div>
+                            <div class="cstat"><span class="cstat-label">Close</span><span class="cstat-val" id="cs-close">--</span></div>
+                        </div>
+                        <div id="price-chart" class="chart-body"></div>
+                    </div>
+
+                    <!-- SIGNALS CARD -->
+                    <div class="signals-card glass-card">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <h2 class="card-title">Live AI Signals</h2>
+                                <span class="card-subtitle">Updated every 15s</span>
+                            </div>
+                            <span class="realtime-badge"><span class="rt-dot"></span>Realtime</span>
+                        </div>
+                        <div class="signals-list" id="signals-container">
+                            <div class="skeleton-signal">
+                                <div class="sk-box sk-chip"></div>
+                                <div class="sk-lines">
+                                    <div class="sk-box sk-line-l"></div>
+                                    <div class="sk-box sk-line-s"></div>
+                                </div>
+                                <div class="sk-box sk-pct"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- BOTTOM SECTION: Intelligence + Activity + Mini Stats -->
+                <div class="bottom-grid">
+
+                    <!-- MARKET INTELLIGENCE -->
+                    <div class="intel-card glass-card">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <h2 class="card-title">Market Intelligence</h2>
+                                <span class="card-subtitle">AI analysis</span>
+                            </div>
+                            <i data-lucide="cpu" class="card-icon-accent"></i>
+                        </div>
+                        <div class="intel-rows">
+                            <div class="intel-row">
+                                <div class="intel-left">
+                                    <div class="intel-icon-wrap vi-wrap"><i data-lucide="activity"></i></div>
+                                    <span>Volatility Index</span>
+                                </div>
+                                <div class="intel-right">
+                                    <div class="intel-bar-wrap"><div class="intel-bar vi-bar" style="--w:25%"></div></div>
+                                    <span class="intel-label low">LOW</span>
+                                </div>
+                            </div>
+                            <div class="intel-row">
+                                <div class="intel-left">
+                                    <div class="intel-icon-wrap ld-wrap"><i data-lucide="droplets"></i></div>
+                                    <span>Liquidity Depth</span>
+                                </div>
+                                <div class="intel-right">
+                                    <div class="intel-bar-wrap"><div class="intel-bar ld-bar" style="--w:82%"></div></div>
+                                    <span class="intel-label high">HIGH</span>
+                                </div>
+                            </div>
+                            <div class="intel-row">
+                                <div class="intel-left">
+                                    <div class="intel-icon-wrap re-wrap"><i data-lucide="shield-alert"></i></div>
+                                    <span>Risk Exposure</span>
+                                </div>
+                                <div class="intel-right">
+                                    <div class="intel-bar-wrap"><div class="intel-bar re-bar" style="--w:52%"></div></div>
+                                    <span class="intel-label med">MEDIUM</span>
+                                </div>
+                            </div>
+                            <div class="intel-row">
+                                <div class="intel-left">
+                                    <div class="intel-icon-wrap mo-wrap"><i data-lucide="trending-up"></i></div>
+                                    <span>Market Momentum</span>
+                                </div>
+                                <div class="intel-right">
+                                    <div class="intel-bar-wrap"><div class="intel-bar mo-bar" style="--w:70%"></div></div>
+                                    <span class="intel-label high">STRONG</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ai-insight-box">
+                            <div class="ai-insight-header">
+                                <i data-lucide="sparkles"></i>
+                                <span>AI Insight</span>
+                            </div>
+                            <p>Current consolidation suggests a potential breakout in high-growth tech sectors within the next 48 hours. Consider scaling into positions with defined risk.</p>
+                        </div>
+                    </div>
+
+                    <!-- RECENT ACTIVITY -->
+                    <div class="activity-card glass-card">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <h2 class="card-title">Recent Activity</h2>
+                                <span class="card-subtitle">Last 24 hours</span>
+                            </div>
+                            <button class="see-all-btn">See All</button>
+                        </div>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="act-dot buy-dot"></div>
+                                <div class="act-info">
+                                    <span class="act-name">BTC/USDT <strong>BUY</strong></span>
+                                    <span class="act-time">2 mins ago</span>
+                                </div>
+                                <div class="act-value green">+$340.00</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="act-dot sell-dot"></div>
+                                <div class="act-info">
+                                    <span class="act-name">NVDA <strong>SELL</strong></span>
+                                    <span class="act-time">18 mins ago</span>
+                                </div>
+                                <div class="act-value green">+$210.50</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="act-dot hold-dot"></div>
+                                <div class="act-info">
+                                    <span class="act-name">ETH/USDT <strong>HOLD</strong></span>
+                                    <span class="act-time">45 mins ago</span>
+                                </div>
+                                <div class="act-value dim">—</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="act-dot sell-dot"></div>
+                                <div class="act-info">
+                                    <span class="act-name">AAPL <strong>SELL</strong></span>
+                                    <span class="act-time">1 hr ago</span>
+                                </div>
+                                <div class="act-value red">-$85.20</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="act-dot buy-dot"></div>
+                                <div class="act-info">
+                                    <span class="act-name">TSLA <strong>BUY</strong></span>
+                                    <span class="act-time">3 hrs ago</span>
+                                </div>
+                                <div class="act-value green">+$620.00</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MINI STAT GAUGES -->
+                    <div class="gauges-card glass-card">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <h2 class="card-title">Performance</h2>
+                                <span class="card-subtitle">This week</span>
+                            </div>
+                        </div>
+                        <div class="gauge-list">
+                            <div class="gauge-item">
+                                <div class="gauge-label">
+                                    <span>Profit Factor</span>
+                                    <span class="gauge-val">2.4x</span>
+                                </div>
+                                <div class="gauge-track"><div class="gauge-fill g-purple" style="--gw:72%"></div></div>
+                            </div>
+                            <div class="gauge-item">
+                                <div class="gauge-label">
+                                    <span>Sharpe Ratio</span>
+                                    <span class="gauge-val">1.87</span>
+                                </div>
+                                <div class="gauge-track"><div class="gauge-fill g-green" style="--gw:62%"></div></div>
+                            </div>
+                            <div class="gauge-item">
+                                <div class="gauge-label">
+                                    <span>Max Drawdown</span>
+                                    <span class="gauge-val red">-8.2%</span>
+                                </div>
+                                <div class="gauge-track"><div class="gauge-fill g-red" style="--gw:28%"></div></div>
+                            </div>
+                            <div class="gauge-item">
+                                <div class="gauge-label">
+                                    <span>Avg Trade Duration</span>
+                                    <span class="gauge-val">4.2h</span>
+                                </div>
+                                <div class="gauge-track"><div class="gauge-fill g-amber" style="--gw:55%"></div></div>
+                            </div>
+                            <div class="gauge-item">
+                                <div class="gauge-label">
+                                    <span>Signal Accuracy</span>
+                                    <span class="gauge-val">74%</span>
+                                </div>
+                                <div class="gauge-track"><div class="gauge-fill g-purple" style="--gw:74%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="/static/js/dashboard.js"></script>
+    <script>lucide.createIcons();</script>
+</body>
+</html>

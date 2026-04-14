@@ -14,6 +14,10 @@ app.mount("/static", StaticFiles(directory=static_path), name="static")
 async def read_index():
     return FileResponse(os.path.join(static_path, "index.html"))
 
+@app.get("/dashboard")
+async def read_dashboard():
+    return FileResponse(os.path.join(static_path, "dashboard.html"))
+
 @app.get("/api/sentiment")
 async def get_sentiment():
     return engine.get_market_sentiment()
