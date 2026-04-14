@@ -284,8 +284,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         utterance.onstart = () => {
             assistant.classList.add('is-speaking');
-            assistant.classList.remove('sig-buy', 'sig-sell', 'sig-hold');
-            assistant.classList.add(`sig-${sig.action.toLowerCase()}`);
+            assistant.classList.remove('sig-buy', 'sig-sell', 'sig-hold', 'sig-neutral');
+            const actionClass = `sig-${sig.action.toLowerCase()}`;
+            assistant.classList.add(actionClass || 'sig-neutral');
         };
 
         utterance.onend = () => {
@@ -337,15 +338,18 @@ document.addEventListener('DOMContentLoaded', () => {
         
         if (isVoiceEnabled) {
             voiceBtn.innerHTML = '<i data-lucide="mic"></i>';
-            voiceBtn.title = "Disable AI Voice";
+            voiceBtn.title = "Disable AI Voice Assistant";
             // Test voice
-            const testUtterance = new SpeechSynthesisUtterance("AI Voice Enabled");
-            testUtterance.rate = 1.1;
+            const testUtterance = new SpeechSynthesisUtterance("AI Voice Control Active");
+            testUtterance.rate = 1.05;
+            assistant.classList.add('is-speaking', 'sig-neutral');
+            testUtterance.onend = () => assistant.classList.remove('is-speaking', 'sig-neutral');
             window.speechSynthesis.speak(testUtterance);
         } else {
             voiceBtn.innerHTML = '<i data-lucide="mic-off"></i>';
-            voiceBtn.title = "Enable AI Voice";
+            voiceBtn.title = "Enable AI Voice Assistant";
             window.speechSynthesis.cancel();
+            assistant.classList.remove('is-speaking', 'sig-neutral', 'sig-buy', 'sig-sell', 'sig-hold');
         }
         lucide.createIcons();
     });
