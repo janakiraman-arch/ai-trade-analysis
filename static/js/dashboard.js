@@ -31,6 +31,62 @@ function flashGlow(el, color = 'rgba(99,102,241,0.5)') {
 // =====================================================================
 document.addEventListener('DOMContentLoaded', () => {
 
+    /* ── View Router ────────────────────────────────────────────── */
+    const views = {
+        'nav-dashboard': document.getElementById('view-dashboard'),
+        'nav-analytics': document.getElementById('view-analytics'),
+        'nav-signals': document.getElementById('view-signals'),
+        'nav-settings': document.getElementById('view-settings')
+    };
+
+    function switchView(targetNavId) {
+        // Remove active class from all navs and views
+        Object.keys(views).forEach(navId => {
+            const navEl = document.getElementById(navId);
+            const viewEl = views[navId];
+            if (navEl) {
+                navEl.classList.remove('active');
+                // Remove pip if not active
+                const pip = navEl.querySelector('.nav-pip');
+                if (pip && activeNavId !== navId) pip.remove();
+            }
+            if (viewEl) viewEl.classList.remove('active');
+        });
+
+        // Add active class to target
+        const activeNavEl = document.getElementById(targetNavId);
+        const activeViewEl = views[targetNavId];
+        
+        if (activeNavEl) {
+            activeNavEl.classList.add('active');
+            // Ensure Pip is present
+            if (!activeNavEl.querySelector('.nav-pip')) {
+                 const pip = document.createElement('div');
+                 pip.className = 'nav-pip';
+                 activeNavEl.appendChild(pip);
+            }
+        }
+        if (activeViewEl) {
+            // Force reflow for CSS animation
+            void activeViewEl.offsetWidth;
+            activeViewEl.classList.add('active');
+        }
+    }
+
+    let activeNavId = 'nav-dashboard';
+
+    Object.keys(views).forEach(navId => {
+        const navEl = document.getElementById(navId);
+        if (navEl) {
+            navEl.addEventListener('click', (e) => {
+                e.preventDefault();
+                if (activeNavId === navId) return;
+                activeNavId = navId;
+                switchView(navId);
+            });
+        }
+    });
+
     /* ── State ──────────────────────────────────────────────────── */
     let currentAsset = 'BTC/USDT';
     let lastPrice    = 0;
@@ -287,10 +343,14 @@ document.addEventListener('DOMContentLoaded', () => {
             assistant.classList.remove('sig-buy', 'sig-sell', 'sig-hold', 'sig-neutral');
             const actionClass = `sig-${sig.action.toLowerCase()}`;
             assistant.classList.add(actionClass || 'sig-neutral');
+            const stopBtn = document.getElementById('voice-stop');
+            if (stopBtn) stopBtn.style.display = 'flex';
         };
 
         utterance.onend = () => {
             assistant.classList.remove('is-speaking');
+            const stopBtn = document.getElementById('voice-stop');
+            if (stopBtn) stopBtn.style.display = 'none';
         };
 
         window.speechSynthesis.speak(utterance);
@@ -330,6 +390,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Voice Stop Navigation
+    const voiceAssistantEl = document.getElementById('voice-assistant');
+    const voiceStopBtn = document.getElementById('voice-stop');
+    if (voiceStopBtn) {
+        voiceStopBtn.addEventListener('click', () => {
+            window.speechSynthesis.cancel();
+            if (voiceAssistantEl) voiceAssistantEl.classList.remove('is-speaking', 'sig-buy', 'sig-sell', 'sig-hold', 'sig-neutral');
+            voiceStopBtn.style.display = 'none';
+        });
+    }
+
     // Voice Toggle
     const voiceBtn = document.getElementById('voice-toggle');
     voiceBtn.addEventListener('click', () => {
@@ -339,17 +410,27 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isVoiceEnabled) {
             voiceBtn.innerHTML = '<i data-lucide="mic"></i>';
             voiceBtn.title = "Disable AI Voice Assistant";
+            
             // Test voice
             const testUtterance = new SpeechSynthesisUtterance("AI Voice Control Active");
             testUtterance.rate = 1.05;
-            assistant.classList.add('is-speaking', 'sig-neutral');
-            testUtterance.onend = () => assistant.classList.remove('is-speaking', 'sig-neutral');
+            
+            testUtterance.onstart = () => {
+                if (voiceAssistantEl) voiceAssistantEl.classList.add('is-speaking', 'sig-neutral');
+                if (voiceStopBtn) voiceStopBtn.style.display = 'flex';
+            };
+            
+            testUtterance.onend = () => {
+                if (voiceAssistantEl) voiceAssistantEl.classList.remove('is-speaking', 'sig-neutral');
+                if (voiceStopBtn) voiceStopBtn.style.display = 'none';
+            };
             window.speechSynthesis.speak(testUtterance);
         } else {
             voiceBtn.innerHTML = '<i data-lucide="mic-off"></i>';
             voiceBtn.title = "Enable AI Voice Assistant";
             window.speechSynthesis.cancel();
-            assistant.classList.remove('is-speaking', 'sig-neutral', 'sig-buy', 'sig-sell', 'sig-hold');
+            if (voiceStopBtn) voiceStopBtn.style.display = 'none';
+            if (voiceAssistantEl) voiceAssistantEl.classList.remove('is-speaking', 'sig-neutral', 'sig-buy', 'sig-sell', 'sig-hold');
         }
         lucide.createIcons();
     });

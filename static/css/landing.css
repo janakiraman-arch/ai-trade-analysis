@@ -275,6 +275,185 @@ body {
     font-weight: 600;
 }
 
+/* Intelligence Section */
+.intelligence {
+    padding: 100px 8%;
+}
+
+.intel-container {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+}
+
+.intel-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.intel-item {
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+}
+
+.intel-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(168, 85, 247, 0.1);
+    color: var(--accent-secondary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.intel-visual {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.intel-glass-card {
+    background: var(--glass-bg);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    min-width: 350px;
+}
+
+.ai-status {
+    color: #10b981;
+    font-weight: 700;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.code-snippet {
+    background: #000;
+    padding: 20px;
+    border-radius: 10px;
+    font-family: monospace;
+    color: #a8b2d1;
+    font-size: 0.9rem;
+    line-height: 1.8;
+}
+
+/* Pricing Section */
+.pricing {
+    padding: 100px 8%;
+    background: rgba(255, 255, 255, 0.01);
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    align-items: center;
+}
+
+.pricing-card {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    padding: 40px;
+    border-radius: 24px;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+
+.pricing-card.recommended {
+    border-color: var(--accent-primary);
+    transform: scale(1.05);
+    background: linear-gradient(180deg, rgba(99, 102, 241, 0.05) 0%, transparent 100%);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.recommended-badge {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent-primary);
+    color: white;
+    padding: 4px 16px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.pricing-card:hover {
+    border-color: rgba(99, 102, 241, 0.5);
+}
+
+.pricing-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+}
+
+.price {
+    font-size: 3rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: white;
+}
+
+.price span {
+    font-size: 1rem;
+    color: var(--text-dim);
+    font-weight: 400;
+}
+
+.pricing-features {
+    list-style: none;
+    margin: 32px 0;
+}
+
+.pricing-features li {
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.pricing-features li i {
+    color: #10b981;
+    width: 20px;
+}
+
+.pricing-features li.disabled {
+    color: var(--text-dim);
+    opacity: 0.5;
+}
+
+.pricing-features li.disabled i {
+    color: #ef4444;
+}
+
+.btn-outline {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all 0.3s;
+}
+
+.btn-outline:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--text-main);
+}
+
 /* CTA Section */
 .cta {
     padding: 140px 8%;
@@ -350,12 +529,13 @@ footer {
 @media (max-width: 1024px) {
     .hero { flex-direction: column; text-align: center; padding-top: 180px; }
     .hero-desc { margin: 0 auto 40px; }
-    .feature-grid { grid-template-columns: repeat(2, 1fr); }
+    .feature-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    .intel-container { flex-direction: column; }
 }
 
 @media (max-width: 768px) {
     .hero-title { font-size: 3rem; }
-    .feature-grid { grid-template-columns: 1fr; }
+    .feature-grid, .pricing-grid { grid-template-columns: 1fr; }
     .footer-content { grid-template-columns: 1fr 1fr; }
     .nav-links { display: none; }
 }
