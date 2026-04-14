@@ -461,25 +461,16 @@ body {
     -webkit-backdrop-filter: blur(20px);
     position:relative;
     overflow:hidden;
-    transition: border-color 0.35s, box-shadow 0.35s, transform 0.35s var(--ease-smooth);
+    transition: border-color 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out), transform 0.4s var(--ease-bounce);
 }
 
-/* shimmer scan on hover */
-.glass-card::before {
-    content:'';
-    position:absolute;
-    top:0; left:-100%; width:60%; height:100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
-    transition: none;
-    pointer-events:none;
-}
-.glass-card:hover::before {
-    animation: shimmerScan 0.8s ease forwards;
-}
 .glass-card:hover {
-    border-color: rgba(99,102,241,0.2);
-    box-shadow: 0 8px 40px rgba(0,0,0,0.35), 0 0 0 1px rgba(99,102,241,0.08);
-    transform: translateY(-2px);
+    border-color: rgba(99,102,241,0.35);
+    box-shadow: 
+        0 20px 50px -12px rgba(0,0,0,0.5),
+        0 0 0 1px rgba(99,102,241,0.15),
+        inset 0 0 20px rgba(255,255,255,0.02);
+    transform: translateY(-5px) scale(1.005);
 }
 
 /* Card Header */
@@ -687,17 +678,19 @@ body {
 .signal-item {
     display:flex; align-items:center; gap:12px;
     padding:13px 14px;
-    background:rgba(255,255,255,0.03);
+    background:rgba(255,255,255,0.02);
     border-radius:12px;
-    border:1px solid transparent;
-    transition: all 0.3s var(--ease-smooth);
-    animation: fadeUp 0.35s var(--ease-out) both;
+    border:1px solid rgba(255,255,255,0.02);
+    transition: all 0.4s var(--ease-bounce);
+    animation: fadeUp 0.4s var(--ease-out) both;
 }
 .signal-item:hover {
-    background:rgba(255,255,255,0.055);
+    background:rgba(99,102,241,0.08);
     border-color:rgba(99,102,241,0.3);
-    transform:translateX(4px);
-    box-shadow:0 3px 16px rgba(0,0,0,0.18), -3px 0 10px rgba(99,102,241,0.1);
+    transform: scale(1.02) translateX(6px);
+    box-shadow: 
+        -10px 0 20px -10px var(--primary),
+        0 4px 20px rgba(0,0,0,0.25);
 }
 
 .sig-chip {

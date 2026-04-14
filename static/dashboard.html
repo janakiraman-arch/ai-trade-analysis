@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Apex AI | Trading Dashboard</title>
+    <title>Apex AI | Advanced Trading Dashboard</title>
     <meta name="description" content="Apex AI real-time trading dashboard — monitor live signals, candlestick charts, sentiment analysis and market intelligence.">
     <link rel="stylesheet" href="/static/css/dashboard.css">
     <!-- Google Fonts -->
@@ -38,6 +38,10 @@
 
             <div class="sidebar-section-label">MAIN MENU</div>
             <nav class="sidebar-nav">
+                <a href="/" class="nav-link" id="nav-home">
+                    <div class="nav-icon"><i data-lucide="home"></i></div>
+                    <span>Home</span>
+                </a>
                 <a href="/dashboard" class="nav-link active" id="nav-dashboard">
                     <div class="nav-icon"><i data-lucide="layout-dashboard"></i></div>
                     <span>Dashboard</span>
@@ -52,36 +56,20 @@
                     <span>AI Signals</span>
                     <span class="nav-badge">LIVE</span>
                 </a>
-                <a href="#" class="nav-link" id="nav-portfolio">
-                    <div class="nav-icon"><i data-lucide="wallet"></i></div>
-                    <span>Portfolio</span>
-                </a>
-                <a href="#" class="nav-link" id="nav-history">
-                    <div class="nav-icon"><i data-lucide="history"></i></div>
-                    <span>Trade History</span>
-                </a>
             </nav>
 
             <div class="sidebar-section-label">SYSTEM</div>
             <nav class="sidebar-nav">
-                <a href="#" class="nav-link" id="nav-alerts">
-                    <div class="nav-icon"><i data-lucide="bell"></i></div>
-                    <span>Alerts</span>
-                </a>
                 <a href="#" class="nav-link" id="nav-settings">
                     <div class="nav-icon"><i data-lucide="settings"></i></div>
                     <span>Settings</span>
                 </a>
-                <a href="/" class="nav-link" id="nav-home">
-                    <div class="nav-icon"><i data-lucide="home"></i></div>
-                    <span>Home</span>
-                </a>
             </nav>
 
             <div class="sidebar-footer">
-                <img src="https://ui-avatars.com/api/?name=Trader&background=6366f1&color=fff&size=40" alt="User">
+                <img src="/static/assets/avatar_pro.png" alt="Apex Trader Avatar">
                 <div class="footer-user">
-                    <span class="footer-name">Pro Trader</span>
+                    <span class="footer-name">Apex Trader</span>
                     <span class="footer-plan">Premium Plan</span>
                 </div>
                 <div class="footer-dot"></div>
@@ -94,9 +82,9 @@
             <!-- TOP HEADER -->
             <header class="topbar">
                 <div class="topbar-left">
-                    <h1 class="page-title">Dashboard <span class="page-title-accent">Overview</span></h1>
+                    <h1 class="page-title">Market <span class="page-title-accent">Overview</span></h1>
                     <div class="breadcrumb">
-                        <span>Home</span>
+                        <span>Apex</span>
                         <i data-lucide="chevron-right"></i>
                         <span class="bc-active">Dashboard</span>
                     </div>
@@ -104,7 +92,7 @@
                 <div class="topbar-right">
                     <div class="search-wrap">
                         <i data-lucide="search"></i>
-                        <input id="search-input" type="text" placeholder="Search assets, e.g. BTC…">
+                        <input id="search-input" type="text" placeholder="Search assets...">
                     </div>
                     <div class="live-ticker" id="live-price-wrapper">
                         <div class="ticker-asset" id="ticker-asset">BTC/USDT</div>
@@ -119,7 +107,7 @@
                             <div class="bar"></div>
                             <div class="bar"></div>
                         </div>
-                        <button class="voice-toggle" id="voice-toggle" title="Enable AI Voice">
+                        <button class="voice-toggle" id="voice-toggle" title="Toggle AI Voice">
                             <i data-lucide="mic-off"></i>
                         </button>
                     </div>
@@ -128,7 +116,11 @@
                         LIVE
                     </div>
                     <button class="avatar-btn">
-                        <img src="https://ui-avatars.com/api/?name=TR&background=6366f1&color=fff&size=38" alt="Trader">
+                        <img src="/static/assets/avatar_pro.png" alt="Profile">
+                    </button>
+                </div>
+            </header>
+8" alt="Trader">
                     </button>
                 </div>
             </header>
