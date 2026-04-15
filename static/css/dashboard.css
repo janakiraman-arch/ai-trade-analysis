@@ -895,17 +895,17 @@ body {
 
 /* Price tick animations */
 @keyframes priceUp {
-    0%  { color:var(--text); }
-    15% { color:var(--success); text-shadow:0 0 10px rgba(16,185,129,0.7); transform:scale(1.05); }
-    100%{ color:var(--text); }
+    0%  { color:var(--text); transform: translateY(0) scale(1); }
+    15% { color:var(--success); text-shadow:0 0 10px rgba(16,185,129,0.7); transform: translateY(-4px) scale(1.05); }
+    100%{ color:var(--text); transform: translateY(0) scale(1); }
 }
 @keyframes priceDown {
-    0%  { color:var(--text); }
-    15% { color:var(--danger); text-shadow:0 0 10px rgba(239,68,68,0.7); transform:scale(1.05); }
-    100%{ color:var(--text); }
+    0%  { color:var(--text); transform: translateY(0) scale(1); }
+    15% { color:var(--danger); text-shadow:0 0 10px rgba(239,68,68,0.7); transform: translateY(4px) scale(1.05); }
+    100%{ color:var(--text); transform: translateY(0) scale(1); }
 }
-.price-up   { animation:priceUp   0.9s ease-out; }
-.price-down { animation:priceDown 0.9s ease-out; }
+.price-up   { animation:priceUp   0.9s ease-out; display: inline-block; }
+.price-down { animation:priceDown 0.9s ease-out; display: inline-block; }
 
 /* ── Responsive ─────────────────────────────────────────── */
 @media (max-width:1400px) {

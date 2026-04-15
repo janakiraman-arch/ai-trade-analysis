@@ -34,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ── View Router ────────────────────────────────────────────── */
     const views = {
         'nav-dashboard': document.getElementById('view-dashboard'),
+        'nav-live': document.getElementById('view-live'),
         'nav-intelligence': document.getElementById('view-intelligence'),
         'nav-activity': document.getElementById('view-activity'),
         'nav-analytics': document.getElementById('view-analytics'),
@@ -103,6 +104,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     try {
         chart = LightweightCharts.createChart(chartEl, {
+            width: chartEl.clientWidth || 800,
+            height: chartEl.clientHeight || 400,
             layout: {
                 background: { color: 'transparent' },
                 textColor:  '#64748b',

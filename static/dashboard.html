@@ -196,8 +196,58 @@
 
                 <!-- MIDDLE SECTION: Chart + Signals -->
                 <div class="mid-grid">
+                    <!-- CHART CARD -->
+                    <div class="chart-card glass-card">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <h2 class="card-title">Market Analysis</h2>
+                                <span class="card-subtitle">Candlestick · Real-time</span>
+                            </div>
+                            <div class="chart-controls">
+                                <div class="tf-pills">
+                                    <button class="tf-pill active" data-tf="1H">1H</button>
+                                    <button class="tf-pill" data-tf="4H">4H</button>
+                                    <button class="tf-pill" data-tf="1D">1D</button>
+                                </div>
+                                <select id="asset-selector" class="asset-select">
+                                    <option value="BTC/USDT">BTC/USDT</option>
+                                    <option value="ETH/USDT">ETH/USDT</option>
+                                    <option value="NVDA">NVDA</option>
+                                    <option value="AAPL">AAPL</option>
+                                    <option value="TSLA">TSLA</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="chart-stats-row">
+                            <div class="cstat"><span class="cstat-label">Open</span><span class="cstat-val" id="cs-open">--</span></div>
+                            <div class="cstat"><span class="cstat-label">High</span><span class="cstat-val green" id="cs-high">--</span></div>
+                            <div class="cstat"><span class="cstat-label">Low</span><span class="cstat-val red" id="cs-low">--</span></div>
+                            <div class="cstat"><span class="cstat-label">Close</span><span class="cstat-val" id="cs-close">--</span></div>
+                        </div>
+                        <div id="price-chart" class="chart-body"></div>
+                    </div>
 
-</div>
+                    <!-- Live AI Signals Container -->
+                    <div class="signals-card glass-card" style="margin-bottom: 20px;">
+                        <div class="card-header">
+                            <div class="card-title-group">
+                                <h2 class="card-title">Live AI Signals</h2>
+                                <span class="card-subtitle">Updated every 15s</span>
+                            </div>
+                            <span class="realtime-badge"><span class="rt-dot"></span>Realtime</span>
+                        </div>
+                        <div class="signals-list" id="signals-container">
+                            <div class="skeleton-signal">
+                                <div class="sk-box sk-chip"></div>
+                                <div class="sk-lines">
+                                    <div class="sk-box sk-line-l"></div>
+                                    <div class="sk-box sk-line-s"></div>
+                                </div>
+                                <div class="sk-box sk-pct"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <!-- BOTTOM SECTION: Intelligence + Activity + Mini Stats -->
                 <div class="bottom-grid" style="grid-template-columns: 1fr;">
@@ -326,26 +376,7 @@
                 <!-- AI Signals View -->
                 <div id="view-signals" class="view-panel">
 
-                    <!-- Live AI Signals Container -->
-                    <div class="signals-card glass-card" style="margin-bottom: 20px;">
-                        <div class="card-header">
-                            <div class="card-title-group">
-                                <h2 class="card-title">Live AI Signals</h2>
-                                <span class="card-subtitle">Updated every 15s</span>
-                            </div>
-                            <span class="realtime-badge"><span class="rt-dot"></span>Realtime</span>
-                        </div>
-                        <div class="signals-list" id="signals-container">
-                            <div class="skeleton-signal">
-                                <div class="sk-box sk-chip"></div>
-                                <div class="sk-lines">
-                                    <div class="sk-box sk-line-l"></div>
-                                    <div class="sk-box sk-line-s"></div>
-                                </div>
-                                <div class="sk-box sk-pct"></div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Live AI Signals migrated to Dashboard -->
 
                     <div style="display:flex; justify-content:space-between; margin-bottom: 20px;">
                         <h2 class="card-title" style="font-size:1.5rem;">Signal Architecture</h2>
@@ -420,36 +451,7 @@
 
                 <!-- Live Market View -->
                 <div id="view-live" class="view-panel">
-                    <!-- CHART CARD -->
-                    <div class="chart-card glass-card">
-                        <div class="card-header">
-                            <div class="card-title-group">
-                                <h2 class="card-title">Market Analysis</h2>
-                                <span class="card-subtitle">Candlestick · Real-time</span>
-                            </div>
-                            <div class="chart-controls">
-                                <div class="tf-pills">
-                                    <button class="tf-pill active" data-tf="1H">1H</button>
-                                    <button class="tf-pill" data-tf="4H">4H</button>
-                                    <button class="tf-pill" data-tf="1D">1D</button>
-                                </div>
-                                <select id="asset-selector" class="asset-select">
-                                    <option value="BTC/USDT">BTC/USDT</option>
-                                    <option value="ETH/USDT">ETH/USDT</option>
-                                    <option value="NVDA">NVDA</option>
-                                    <option value="AAPL">AAPL</option>
-                                    <option value="TSLA">TSLA</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="chart-stats-row">
-                            <div class="cstat"><span class="cstat-label">Open</span><span class="cstat-val" id="cs-open">--</span></div>
-                            <div class="cstat"><span class="cstat-label">High</span><span class="cstat-val green" id="cs-high">--</span></div>
-                            <div class="cstat"><span class="cstat-label">Low</span><span class="cstat-val red" id="cs-low">--</span></div>
-                            <div class="cstat"><span class="cstat-label">Close</span><span class="cstat-val" id="cs-close">--</span></div>
-                        </div>
-                        <div id="price-chart" class="chart-body"></div>
-                    </div>
+                    <!-- Live Chart migrated to Dashboard -->
 
                                 </div>
 
