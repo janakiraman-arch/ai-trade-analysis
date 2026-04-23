@@ -27,6 +27,13 @@
             <a href="#pricing">Pricing</a>
         </nav>
         <div class="nav-actions">
+            <div class="music-player music-player-nav" data-music-player>
+                <button class="music-toggle" type="button" data-music-toggle title="Play ambient music" aria-label="Toggle ambient music">
+                    <i data-lucide="music-4"></i>
+                    <span data-music-label>Ambient Off</span>
+                </button>
+                <input class="music-volume" data-music-volume type="range" min="0" max="100" value="35" aria-label="Ambient music volume">
+            </div>
             <a href="/dashboard" class="btn-primary">Launch Dashboard</a>
         </div>
     </header>
@@ -241,6 +248,11 @@
         </div>
     </footer>
 
+    <audio id="ambient-audio" loop preload="auto">
+        <source src="/static/audio/apex-ambient.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="/static/js/music-player.js"></script>
     <script>
         lucide.createIcons();
 

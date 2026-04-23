@@ -99,6 +99,12 @@ body {
     color: var(--accent-primary);
 }
 
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
 .btn-primary {
     background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
     color: white;
@@ -115,6 +121,45 @@ body {
 .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+}
+
+.music-player {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--glass-border);
+    background: rgba(8, 11, 20, 0.72);
+    backdrop-filter: blur(14px);
+}
+
+.music-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    background: none;
+    color: var(--text-main);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.music-toggle:hover {
+    color: white;
+    transform: translateY(-1px);
+}
+
+.music-toggle.active {
+    color: #7dd3fc;
+}
+
+.music-volume {
+    width: 84px;
+    accent-color: var(--accent-primary);
+    cursor: pointer;
 }
 
 /* Hero Section */
@@ -531,6 +576,15 @@ footer {
     .hero-desc { margin: 0 auto 40px; }
     .feature-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
     .intel-container { flex-direction: column; }
+    .nav-actions {
+        gap: 12px;
+    }
+    .music-player {
+        padding: 8px 10px;
+    }
+    .music-volume {
+        width: 64px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -538,4 +592,23 @@ footer {
     .feature-grid, .pricing-grid { grid-template-columns: 1fr; }
     .footer-content { grid-template-columns: 1fr 1fr; }
     .nav-links { display: none; }
+    .navbar {
+        padding: 0 5%;
+    }
+    .music-player {
+        position: fixed;
+        right: 16px;
+        bottom: 16px;
+        z-index: 1100;
+        box-shadow: 0 16px 28px rgba(0, 0, 0, 0.35);
+    }
+    .music-toggle span {
+        display: none;
+    }
+    .music-volume {
+        width: 56px;
+    }
+    .btn-primary {
+        padding: 12px 20px;
+    }
 }

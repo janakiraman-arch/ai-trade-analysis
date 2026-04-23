@@ -390,6 +390,52 @@ body {
 }
 .ticker-change { font-size:.65rem; font-weight:600; color:var(--dim); }
 
+.music-player {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 12px;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255,255,255,0.03);
+    transition: border-color 0.25s var(--ease-smooth), background 0.25s var(--ease-smooth), box-shadow 0.25s var(--ease-smooth);
+}
+
+.music-player:hover {
+    border-color: rgba(125, 211, 252, 0.35);
+    background: rgba(125, 211, 252, 0.06);
+    box-shadow: 0 0 0 1px rgba(125, 211, 252, 0.08);
+}
+
+.music-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    background: none;
+    color: var(--dim);
+    cursor: pointer;
+    font: inherit;
+    font-size: .78rem;
+    font-weight: 700;
+    transition: color 0.25s var(--ease-smooth), transform 0.25s var(--ease-bounce);
+}
+
+.music-toggle:hover {
+    color: var(--text);
+    transform: scale(1.03);
+}
+
+.music-toggle.active {
+    color: #7dd3fc;
+}
+
+.music-volume {
+    width: 72px;
+    accent-color: #38bdf8;
+    cursor: pointer;
+}
+
 /* Status */
 .status-chip {
     display:flex; align-items:center; gap:7px;
@@ -912,6 +958,15 @@ body {
     .kpi-row  { grid-template-columns:repeat(2,1fr); }
     .mid-grid { grid-template-columns:1fr; }
     .bottom-grid { grid-template-columns:1fr 1fr; }
+    .topbar-right {
+        gap: 12px;
+    }
+    .music-toggle span {
+        display: none;
+    }
+    .music-volume {
+        width: 56px;
+    }
 }
 @media (max-width:900px) {
     .sidebar { width:64px; }
@@ -922,6 +977,18 @@ body {
     .sidebar-footer { flex-direction:column; align-items:center; gap:0; padding:10px 0; }
     .kpi-row  { grid-template-columns:1fr 1fr; }
     .bottom-grid { grid-template-columns:1fr; }
+    .topbar {
+        height: auto;
+        padding: 16px 20px;
+        align-items: flex-start;
+    }
+    .topbar-right {
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+    .search-wrap {
+        width: 180px;
+    }
 }
 
 /* ═══════════════════════════════════════════════════════════

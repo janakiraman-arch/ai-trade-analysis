@@ -111,6 +111,13 @@
                         <div class="ticker-price" id="ticker-price">--</div>
                         <div class="ticker-change" id="ticker-change">--</div>
                     </div>
+                    <div class="music-player music-player-dashboard" data-music-player>
+                        <button class="music-toggle" type="button" data-music-toggle title="Play ambient music" aria-label="Toggle ambient music">
+                            <i data-lucide="music-4"></i>
+                            <span data-music-label>Ambient Off</span>
+                        </button>
+                        <input class="music-volume" data-music-volume type="range" min="0" max="100" value="35" aria-label="Ambient music volume">
+                    </div>
                     <div class="voice-assistant" id="voice-assistant">
                         <div class="waveform" id="voice-waveform">
                             <div class="bar"></div>
@@ -593,7 +600,12 @@
         </div>
     </div>
 
+    <audio id="ambient-audio" loop preload="auto">
+        <source src="/static/audio/apex-ambient.mp3" type="audio/mpeg">
+    </audio>
+
     <script src="/static/js/dashboard.js"></script>
+    <script src="/static/js/music-player.js"></script>
     <script>lucide.createIcons();</script>
 </body>
 </html>
