@@ -40,6 +40,14 @@ async def read_index():
 async def read_dashboard():
     return FileResponse(os.path.join(static_path, "dashboard.html"))
 
+@app.get("/manifest.json")
+async def get_manifest():
+    return FileResponse(os.path.join(static_path, "manifest.json"))
+
+@app.get("/sw.js")
+async def get_sw():
+    return FileResponse(os.path.join(static_path, "sw.js"), media_type="application/javascript")
+
 @app.get("/api/sentiment")
 async def get_sentiment():
     return engine.get_market_sentiment()

@@ -1,0 +1,22 @@
+{
+  "name": "Apex AI Trade Analysis",
+  "short_name": "Apex AI",
+  "description": "Institutional-grade AI Trade Intelligence.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0b0e",
+  "theme_color": "#10b981",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/static/assets/avatar_pro.webp",
+      "sizes": "192x192 512x512",
+      "type": "image/webp"
+    },
+    {
+      "src": "/static/assets/avatar_pro.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png"
+    }
+  ]
+}
